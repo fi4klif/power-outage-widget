@@ -12,6 +12,8 @@ const API_URL = "https://off.energy.mk.ua/api/v2/schedule/active";
 const TIME_API = "https://off.energy.mk.ua/api/schedule/time-series";
 
 app.use(cors());
+app.use("/style", express.static(path.join(__dirname, "../style")));
+app.use("/scripts", express.static(path.join(__dirname, "../scripts")));
 
 let cachedData = null;
 let timeMap = {};

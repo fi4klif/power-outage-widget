@@ -26,9 +26,8 @@ async function updateWidget() {
 
       let statusText = "Світло є 💡";
       if (slot.status === "OFF") statusText = "Вимкнено 🌑";
-      if (slot.status === "PROBABLY_OFF") statusText = "Можливо ⚠️";
 
-      if (slot.status === "ENABLE") lightCount++;
+      if (slot.status === "ENABLE" || slot.status === "PROBABLY_OFF") lightCount++;
 
       div.innerHTML = `<span class="time">${slot.time_range}</span><span class="status">${statusText}</span>`;
       container.appendChild(div);
@@ -36,8 +35,8 @@ async function updateWidget() {
 
     const currentSlot = data.schedule[0];
     if (currentSlot) {
-      statusLabel.innerText =
-        currentSlot.status === "OFF" ? "Зараз темно" : "Зараз світло";
+      const hasLight = currentSlot.status === "ENABLE" || currentSlot.status === "PROBABLY_OFF";
+      statusLabel.innerText = hasLight ? "Зараз світло" : "Зараз темно";
       statusLabel.className = `status-indicator ${currentSlot.status}`;
     }
 

@@ -77,7 +77,7 @@ body {
   border-left: 3px solid var(--color-on);
 }
 .slot-item.PROBABLY_OFF {
-  border-left: 3px solid var(--color-maybe);
+  border-left: 3px solid var(--color-on);
 }
 
 .time {

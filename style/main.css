@@ -1,60 +1,85 @@
-/* Робимо фон сторінки повністю прозорим */
+:root {
+    --bg-overlay: rgba(30, 30, 30, 0.6); /* Напівпрозорий фон */
+    --text-primary: #ecf0f1;
+    --text-secondary: #bdc3c7;
+    --accent: #f1c40f; /* TUF Yellow */
+    --color-off: #e74c3c;
+    --color-on: #2ecc71;
+    --color-maybe: #e67e22;
+}
+
 body {
     margin: 0;
-    padding: 0;
+    padding: 10px;
     font-family: 'Segoe UI', sans-serif;
-    background-color: transparent !important; 
-    overflow: hidden;
+    /* ПРОЗОРІСТЬ: Важливо для Obsidian */
+    background-color: transparent; 
+    color: var(--text-primary);
+    overflow: hidden; /* Прибираємо скрол сторінки */
 }
 
 .widget-container {
-    /* Прибираємо суцільний фон, залишаємо тільки напівпрозорість за бажанням 
-       або повністю видаляємо background */
-    background: rgba(45, 45, 45, 0.4); 
-    color: #dcddde;
-    padding: 10px;
+    background: var(--bg-overlay);
+    backdrop-filter: blur(8px); /* Ефект матового скла */
     border-radius: 12px;
-    border: 1px solid rgba(243, 156, 18, 0.3); /* Легка рамка TUF */
-    backdrop-filter: blur(5px); /* Ефект матового скла */
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.schedule-item {
+.header {
     display: flex;
     justify-content: space-between;
-    padding: 6px 10px;
-    margin-bottom: 4px;
-    background: rgba(255, 255, 255, 0.05); /* Ледь помітний фон для пунктів */
-    border-radius: 6px;
-    font-size: 0.9em;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
 }
 
-.schedule-item.off { color: #ff5555; border-left: 3px solid #ff5555; }
-.schedule-item.enable { color: #50fa7b; border-left: 3px solid #50fa7b; }
-.schedule-item.probably_off { color: #f1fa8c; border-left: 3px solid #f1fa8c; }
-
-.widget-footer {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 10px;
-    margin-top: 10px;
-    text-align: center;
+.header h2 {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-
-.status-indicator {
-    padding: 5px;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.status-indicator.on { background: #2ecc71; color: #000; }
-.status-indicator.off { background: #e74c3c; color: #fff; }
-
+/* Список слотів */
 .schedule-grid {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
+    max-height: 380px; /* Обмеження висоти списку */
+    overflow-y: auto;
+    padding-right: 5px;
 }
 
+/* Стиль скролбару */
+.schedule-grid::-webkit-scrollbar { width: 4px; }
+.schedule-grid::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 2px; }
 
+.slot-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+    font-size: 0.9em;
+    align-items: center;
+}
+
+.slot-item.OFF { border-left: 3px solid var(--color-off); }
+.slot-item.ENABLE { border-left: 3px solid var(--color-on); }
+.slot-item.PROBABLY_OFF { border-left: 3px solid var(--color-maybe); }
+
+.time { font-weight: bold; }
+.status { font-size: 0.85em; opacity: 0.8; text-transform: uppercase;}
+
+.footer {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    text-align: center;
+}

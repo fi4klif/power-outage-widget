@@ -1,52 +1,53 @@
 const API_URL = '/api/schedule';
 
-async function updateWidget() {
+async function loadData() {
+    const container = document.getElementById('schedule-grid');
+    const footerInfo = document.getElementById('light-info');
+    
     try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
+        const res = await fetch(API_URL);
+        const data = await res.json();
 
-        if (data.error) return;
+        if (data.error) {
+            container.innerHTML = `<div style="text-align:center">${data.error}</div>`;
+            return;
+        }
 
-        document.getElementById('queue-title').innerText = `Черга ${data.queue}`;
-        document.getElementById('update-time').innerText = new Date(data.lastUpdate).toLocaleTimeString();
+        document.getElementById('queue-title').innerText = `ГПВ: Черга 5.2`; // Можна хардкодом, якщо це твій особистий віджет
 
-        const grid = document.getElementById('schedule-grid');
-        grid.innerHTML = '';
-
-        let totalLightHours = 0;
+        container.innerHTML = '';
+        let lightCount = 0;
 
         data.schedule.forEach(slot => {
-            const slotElement = document.createElement('div');
-            slotElement.className = `schedule-item ${slot.type.toLowerCase()}`;
+            const div = document.createElement('div');
+            // Додаємо клас для кольору (OFF, ENABLE, PROBABLY_OFF)
+            div.className = `slot-item ${slot.status}`;
             
-            // Якщо тип не OFF, додаємо 2 години до загального часу зі світлом
-            // (Зазвичай 1 слот = 2 години у графіках)
-            if (slot.type !== 'OFF') totalLightHours += 2;
+            // Красивий текст статусу
+            let statusText = "Світло є";
+            if (slot.status === 'OFF') statusText = "Вимкнено";
+            if (slot.status === 'PROBABLY_OFF') statusText = "Можливо";
+            
+            if (slot.status !== 'OFF') lightCount++; // Рахуємо слоти зі світлом
 
-            slotElement.innerHTML = `
-                <span class="slot-time">${slot.time}</span>
-                <span class="slot-status">${getStatusName(slot.type)}</span>
+            div.innerHTML = `
+                <span class="time">${slot.time_range}</span>
+                <span class="status">${statusText}</span>
             `;
-            grid.appendChild(slotElement);
+            container.appendChild(div);
         });
 
-        // Додаємо інформацію про загальний час зі світлом
-        const footer = document.querySelector('.widget-footer');
-        footer.innerHTML = `
-            <div>Загалом зі світлом сьогодні: <strong>~${totalLightHours} год.</strong></div>
-            <div style="font-size: 0.8em; margin-top:5px;">Оновлено: ${new Date(data.lastUpdate).toLocaleTimeString()}</div>
-        `;
+        // Виноска внизу
+        // Зазвичай 1 слот = 1 година або 2, залежно від time-series. 
+        // Припустимо, що це кількість слотів.
+        footerInfo.innerText = `Доступних слотів: ${lightCount} з ${data.schedule.length}`;
+        document.getElementById('update-time').innerText = new Date(data.lastUpdate).toLocaleTimeString();
 
-    } catch (error) {
-        console.error('Помилка:', error);
+    } catch (e) {
+        console.error(e);
+        container.innerHTML = "Помилка з'єднання...";
     }
 }
 
-function getStatusName(type) {
-    if (type === 'OFF') return '🌑 Немає';
-    if (type === 'PROBABLY_OFF') return '⏳ Можливо';
-    return '💡 Є світло';
-}
-
-updateWidget();
-setInterval(updateWidget, 60000);
+loadData();
+setInterval(loadData, 60000);

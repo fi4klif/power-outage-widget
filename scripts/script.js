@@ -1,5 +1,5 @@
-// Конфігурація: встав сюди URL свого деплою на Render
-const API_URL = 'https://power-outage-widget.onrender.com/api/schedule';
+
+const API_URL = '/api/schedule';
 
 async function updateWidget() {
     try {

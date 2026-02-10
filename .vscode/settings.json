@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd d:\\\\file\\\\code\\\\obsidian\\\\power outage widget ; node scripts/check_queue\\.js$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

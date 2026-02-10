@@ -1,85 +1,99 @@
 :root {
-    --bg-overlay: rgba(30, 30, 30, 0.6); /* Напівпрозорий фон */
-    --text-primary: #ecf0f1;
-    --text-secondary: #bdc3c7;
-    --accent: #f1c40f; /* TUF Yellow */
-    --color-off: #e74c3c;
-    --color-on: #2ecc71;
-    --color-maybe: #e67e22;
+  --bg-overlay: rgba(30, 30, 30, 0.6);
+  --text-primary: #ecf0f1;
+  --text-secondary: #bdc3c7;
+  --accent: #f1c40f;
+  --color-off: #e74c3c;
+  --color-on: #2ecc71;
+  --color-maybe: #e67e22;
 }
 
 body {
-    margin: 0;
-    padding: 10px;
-    font-family: 'Segoe UI', sans-serif;
-    /* ПРОЗОРІСТЬ: Важливо для Obsidian */
-    background-color: transparent; 
-    color: var(--text-primary);
-    overflow: hidden; /* Прибираємо скрол сторінки */
+  margin: 0;
+  padding: 10px;
+  font-family: "Segoe UI", sans-serif;
+  background-color: transparent;
+  color: var(--text-primary);
+  overflow: hidden;
 }
 
 .widget-container {
-    background: var(--bg-overlay);
-    backdrop-filter: blur(8px); /* Ефект матового скла */
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border: 1px solid rgba(255,255,255,0.1);
+  background: var(--bg-overlay);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
 }
 
 .header h2 {
-    margin: 0;
-    font-size: 1.1em;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  margin: 0;
+  font-size: 1.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Список слотів */
 .schedule-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    max-height: 380px; /* Обмеження висоти списку */
-    overflow-y: auto;
-    padding-right: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 5px;
 }
 
-/* Стиль скролбару */
-.schedule-grid::-webkit-scrollbar { width: 4px; }
-.schedule-grid::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 2px; }
+.schedule-grid::-webkit-scrollbar {
+  width: 4px;
+}
+.schedule-grid::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 2px;
+}
 
 .slot-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 12px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 6px;
-    font-size: 0.9em;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  font-size: 0.9em;
+  align-items: center;
 }
 
-.slot-item.OFF { border-left: 3px solid var(--color-off); }
-.slot-item.ENABLE { border-left: 3px solid var(--color-on); }
-.slot-item.PROBABLY_OFF { border-left: 3px solid var(--color-maybe); }
+.slot-item.OFF {
+  border-left: 3px solid var(--color-off);
+}
+.slot-item.ENABLE {
+  border-left: 3px solid var(--color-on);
+}
+.slot-item.PROBABLY_OFF {
+  border-left: 3px solid var(--color-maybe);
+}
 
-.time { font-weight: bold; }
-.status { font-size: 0.85em; opacity: 0.8; text-transform: uppercase;}
+.time {
+  font-weight: bold;
+}
+.status {
+  font-size: 0.85em;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
 
 .footer {
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    text-align: center;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8em;
+  color: var(--text-secondary);
+  text-align: center;
 }

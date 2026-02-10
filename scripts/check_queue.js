@@ -1,23 +1,31 @@
-const axios = require('axios');
+const axios = require("axios");
 
-async function getQueues() {
-    try {
-        console.log("🔍 Шукаю ID для черг...");
-        // Отримуємо список черг (тип 3 = ГПВ)
-        const response = await axios.get('https://off.energy.mk.ua/api/outage-queue/by-type/3');
-        const queues = response.data;
+async function findQueueId(queueName) {
+  try {
+    console.log(`🔍 Пошук черги: ${queueName}...\n`);
+    const response = await axios.get(
+      "https://off.energy.mk.ua/api/outage-queue/by-type/3",
+    );
+    const queues = response.data;
 
-        // Шукаємо 5.2
-        const myQueue = queues.find(q => q.name.includes("5.2"));
-        
-        if (myQueue) {
-            console.log(`✅ ЗНАЙДЕНО! Для черги ${myQueue.name} використовуй ID: ${myQueue.id}`);
-        } else {
-            console.log("⚠️ Чергу 5.2 не знайдено в списку. Ось усі доступні:", queues.map(q => `${q.name}: ${q.id}`));
-        }
-    } catch (e) {
-        console.error("Помилка:", e.message);
+    const myQueue = queues.find((q) => q.name.includes(queueName));
+
+    if (myQueue) {
+      console.log(`✅ ЗНАЙДЕНО!`);
+      console.log(`   Назва: ${myQueue.name}`);
+      console.log(`   ID: ${myQueue.id}\n`);
+      console.log(
+        `📝 Замініть у server.js: const MY_QUEUE_ID = ${myQueue.id};\n`,
+      );
+    } else {
+      console.log(`⚠️ Чергу "${queueName}" не знайдено.`);
+      console.log(`Доступні черги:`);
+      queues.forEach((q) => console.log(`   - ${q.name}: ${q.id}`));
+      console.log();
     }
+  } catch (e) {
+    console.error(`❌ Помилка: ${e.message}`);
+  }
 }
 
-getQueues();
+findQueueId("5.2");

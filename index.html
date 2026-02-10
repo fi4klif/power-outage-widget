@@ -9,9 +9,9 @@
 <body>
 
     <div class="widget-container">
-        <header class="widget-header">
+        <header class="header">
             <h2 id="queue-title">Завантаження...</h2>
-            <div id="current-status" class="status-indicator">Перевірка...</div>
+            <div id="current-status" class="status-indicator">...</div>
         </header>
 
         <main class="widget-content">
@@ -19,8 +19,12 @@
                 </div>
         </main>
 
-        <footer class="widget-footer">
-            <span>Оновлено: <span id="update-time">-</span></span>
+        <footer class="footer">
+            <div id="light-info" style="margin-bottom: 5px; font-weight: bold; color: #f1c40f;"></div>
+            
+            <div style="opacity: 0.6;">
+                Оновлено: <span id="update-time">-</span>
+            </div>
         </footer>
     </div>
 

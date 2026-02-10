@@ -29,7 +29,6 @@ async function updateData() {
     } catch (e) { console.error("Помилка API"); }
 }
 
-// Оновлення кожні 20 хвилин
 setInterval(updateData, 20 * 60 * 1000);
 updateData();
 

@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: transparent; /* Щоб краще виглядало в Obsidian */
+}
+
+.widget-container {
+    background: #1e1e1e;
+    color: #dcddde;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 300px;
+}
+
+.status-indicator {
+    padding: 5px;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.status-indicator.on { background: #2ecc71; color: #000; }
+.status-indicator.off { background: #e74c3c; color: #fff; }
+
+.schedule-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: #2d2d2d;
+    border-radius: 4px;
+}
+
+.schedule-item.off { border-left: 4px solid #e74c3c; }
+.schedule-item.enable { border-left: 4px solid #2ecc71; }
+.schedule-item.probably_off { border-left: 4px solid #f1c40f; }
+
+.widget-footer {
+    margin-top: 15px;
+    font-size: 0.8em;
+    opacity: 0.6;
+    text-align: center;
+}

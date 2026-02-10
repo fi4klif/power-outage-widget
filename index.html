@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моніторинг відключень</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="widget-container">
+        <header class="widget-header">
+            <h2 id="queue-title">Завантаження...</h2>
+            <div id="current-status" class="status-indicator">Перевірка...</div>
+        </header>
+
+        <main class="widget-content">
+            <div class="schedule-grid" id="schedule-grid">
+                </div>
+        </main>
+
+        <footer class="widget-footer">
+            <span>Оновлено: <span id="update-time">-</span></span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

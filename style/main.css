@@ -1,16 +1,44 @@
+/* Робимо фон сторінки повністю прозорим */
 body {
     margin: 0;
-    font-family: sans-serif;
-    background: transparent; /* Щоб краще виглядало в Obsidian */
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: transparent !important; 
+    overflow: hidden;
 }
 
 .widget-container {
-    background: #1e1e1e;
+    /* Прибираємо суцільний фон, залишаємо тільки напівпрозорість за бажанням 
+       або повністю видаляємо background */
+    background: rgba(45, 45, 45, 0.4); 
     color: #dcddde;
-    padding: 15px;
-    border-radius: 8px;
-    max-width: 300px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(243, 156, 18, 0.3); /* Легка рамка TUF */
+    backdrop-filter: blur(5px); /* Ефект матового скла */
 }
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    margin-bottom: 4px;
+    background: rgba(255, 255, 255, 0.05); /* Ледь помітний фон для пунктів */
+    border-radius: 6px;
+    font-size: 0.9em;
+}
+
+.schedule-item.off { color: #ff5555; border-left: 3px solid #ff5555; }
+.schedule-item.enable { color: #50fa7b; border-left: 3px solid #50fa7b; }
+.schedule-item.probably_off { color: #f1fa8c; border-left: 3px solid #f1fa8c; }
+
+.widget-footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
 
 .status-indicator {
     padding: 5px;
@@ -29,21 +57,4 @@ body {
     gap: 5px;
 }
 
-.schedule-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    background: #2d2d2d;
-    border-radius: 4px;
-}
 
-.schedule-item.off { border-left: 4px solid #e74c3c; }
-.schedule-item.enable { border-left: 4px solid #2ecc71; }
-.schedule-item.probably_off { border-left: 4px solid #f1c40f; }
-
-.widget-footer {
-    margin-top: 15px;
-    font-size: 0.8em;
-    opacity: 0.6;
-    text-align: center;
-}
